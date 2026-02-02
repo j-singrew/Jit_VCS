@@ -2,8 +2,9 @@
 #Git records metadata like author, timestamp, commit message, and parent commit.
 
 class Commit:
-    parent_reference = None
-    state = None
+    parents = None
+    state_hash= None
     message = None
-    timestamps = None
+    timestamp = None
     authorship_data = None
+
