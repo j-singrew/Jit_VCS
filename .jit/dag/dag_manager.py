@@ -1,6 +1,6 @@
-from graphlib import TopologicalSorter 
 from dataclasses import dataclass 
 from typing import List    
+
 #kay are node 
 #commit_object = {"oid":oid,"parens":CommitData.parents,"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
 #values are iterables of all predecessors of that node in the graph
@@ -12,12 +12,14 @@ class Node:
     oid: bytes
     depends_on:List[str]
 
+DAG = {} 
 
 def DAG(commit_object):
-    dag_commit = Node(commit_object["oid"],[commit_object["parens"]])
 
-    ts = TopologicalSorter()
-    ts.add(dag_commit.oid,*dag_commit.depends_on)
+    dag_commit = Node(commit_object["oid"],commit_object["parents"])
 
-    ts.static_order()
+    DAG[dag_commit.oid] = dag_commit
+
+    return DAG
+
 
