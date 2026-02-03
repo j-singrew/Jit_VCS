@@ -14,7 +14,7 @@ class Node:
 
 
 def DAG(commit_object):
-    dag_commit = Node(commit_object["oid"],[commit_object["parens"]])
+    dag_commit = Node(commit_object["oid"],[commit_object["parents"]])
 
     ts = TopologicalSorter()
     ts.add(dag_commit.oid,*dag_commit.depends_on)
