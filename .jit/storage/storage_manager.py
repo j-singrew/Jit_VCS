@@ -6,6 +6,7 @@ from pathlib import Path
 load_dotenv() 
 
 p = Path(os.getenv("FILE_PATH"))
+p.mkdir(parents=True, exist_ok=True)
 
 
 
