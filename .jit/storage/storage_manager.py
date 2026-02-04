@@ -7,35 +7,7 @@ load_dotenv()
 
 p = Path(os.getenv("FILE_PATH"))
 
-"""
-These must ALWAYS hold:
 
-Same input bytes → same object ID
-
-Same object ID → same bytes
-
-Stored objects are immutable
-
-If something goes wrong, fail loudly
-
-store(oid, bytes)
-
-creates a new file
-
-fails if the file exists
-
-load(oid) -> bytes
-
-returns exact bytes
-
-fails if object does not exist
-
-exists(oid) -> bool
-
-convenience only
-
-must not modify state
-"""
 
 def exists(oid) -> bool:
     for f in p.iterdir():
@@ -49,12 +21,9 @@ def exists(oid) -> bool:
 
 def storage(oid,byte):
 
-    exist = exists(oid)
-    if exist:
-        open('f"{oid}"',"x")
-
-        with open('f"{oid}"',"w") as file:
-            file .write(byte)
+    if exists(oid):
+        raise Exception('file with OID f"{oid}" already exists')
     else:
-        print("Error oid alreay exists")
+        with open(f"{oid}","xb") as file:
+            file .write(byte)
 
