@@ -48,3 +48,13 @@ def exists(oid) -> bool:
             
 
 def storage(oid,byte):
+
+    exist = exists(oid)
+    if exist:
+        open('f"{oid}"',"x")
+
+        with open('f"{oid}"',"w") as file:
+            file .write(byte)
+    else:
+        print("Error oid alreay exists")
+
