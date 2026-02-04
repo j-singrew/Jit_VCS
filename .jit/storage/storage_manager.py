@@ -22,8 +22,8 @@ def exists(oid) -> bool:
 def storage(oid,byte):
 
     if exists(oid):
-        raise Exception('file with OID f"{oid}" already exists')
+        raise Exception(f'file with OID {oid} already exists')
     else:
-        with open(f"{oid}","xb") as file:
+        with open(p/f"{oid}","xb") as file:
             file .write(byte)
 
