@@ -1,7 +1,8 @@
 from dataclasses import dataclass 
 from typing import List    
 from dag import dag_manager
-
+from HEAD import current_HEAD
+from storage import storage_manager
 #kay are node 
 #commit_object = {"oid":oid,"parens":CommitData.parents,"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
 #values are iterables of all predecessors of that node in the graph
@@ -22,13 +23,16 @@ class HEAD:
 
 DAG = {} 
 
-def DAG(commit_object):
+def Dag(commit_object):
 
     dag_commit = Node(commit_object["oid"],commit_object["parents"])
 
     DAG[dag_commit.oid] = dag_commit
     Head =  HEAD(dag_commit.oid)
-    dag_manager.UpdateHead(Head)
+    current_HEAD.write_head(dag_commit.oid)
+    storage_manager.storage(dag_commit.oid)
+
+    
 
 
 
