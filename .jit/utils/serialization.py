@@ -1,38 +1,45 @@
 from objects import commit
-def serialization(CommitData):
 
-    lines ={}
+def serialization(CommitData):
+    lines = []
 
     lines.append("commit-v1")
 
-    if not CommitData.parents:
-        lines.append({"parent":None})
+    if CommitData.parents:
+        for parent in CommitData.parents:
+            lines.append(f"parent={parent}")
     else:
-        for parent_oid in CommitData.parents:
-            lines.append({"parent":parent_oid})
+        lines.append("parent=")
 
-    lines.append({"state":CommitData.state_hash})
-    lines.append({"time" : CommitData.timestamp})
+    lines.append(f"state={CommitData.state_hash}")
+    lines.append(f"time={CommitData.timestamp}")
 
-    serialized = (lines).encode("utf-8")
-
-    return serialized
+    return "\n".join(lines).encode("utf-8")
 
 
+def deserialization(data: bytes):
+    text = data.decode("utf-8")
+    lines = text.splitlines()
 
-def deserialization(Data):
+    parents = []
+    state = None
+    timestamp = None
 
-    data = Data.decode('utf-8')
-    
-    parents = data["parent"]
-    state = data["state"]
-    timestamep = data["time"]
+    for line in lines:
+        if line.startswith("parent="):
+            value = line.split("=", 1)[1]
+            if value:
+                parents.append(value)
+        elif line.startswith("state="):
+            state = line.split("=", 1)[1]
+        elif line.startswith("time="):
+            timestamp = int(line.split("=", 1)[1])
 
-    item_commit =  commit.Commit
-
-    item_commit.parents  = parents
-    item_commit.state_hash = state
-    item_commit.timestamp = timestamep
+    item_commit = commit.Commit(
+        parents=parents,
+        state_hash=state,
+        timestamp=timestamp
+    )
 
     return item_commit
 
