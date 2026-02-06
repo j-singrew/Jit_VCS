@@ -1,6 +1,7 @@
 from utils import hashing,serialization
 from dag import dag_manager
 from HEAD import current_HEAD
+
 def main_commit(CommitData):
 
     #Pass commit 
