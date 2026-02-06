@@ -11,7 +11,7 @@ from storage import storage_manager
 @dataclass
 class Node:
     oid: bytes
-    depends_on:List[str]
+    depends_on: List[bytes]
 
 DAG = {} 
 
@@ -21,7 +21,7 @@ def Dag(commit_object):
 
     DAG[dag_commit.oid] = dag_commit
     current_HEAD.write_head(dag_commit.oid)
-    storage_manager.storage(dag_commit.oid)
+    storage_manager.storage(dag_commit.oid,dag_commit.depends_on)
 
     
 
