@@ -11,22 +11,17 @@ from storage import storage_manager
 @dataclass
 class Node:
     oid: bytes
-    depends_on:List[str]
+    depends_on: List[bytes]
 
 DAG = {} 
 
-def Dag(commit_object):
+def Dag(commit_object,serialized_commit):
 
     dag_commit = Node(commit_object["oid"],commit_object["parents"])
 
     DAG[dag_commit.oid] = dag_commit
+    storage_manager.storage(dag_commit.oid ,serialized_commit)
     current_HEAD.write_head(dag_commit.oid)
-    storage_manager.storage(dag_commit.oid)
-
-    
-
-
-
     return DAG
 
 
