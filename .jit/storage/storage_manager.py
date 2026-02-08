@@ -21,16 +21,18 @@ def exists(oid:str) -> bool:
 
             
 
-def storage(oid,byte):
+def storage(oid: bytes ):
 
     shard_folder,_ = paths_for_oid(oid)
     shard_folder.mkdir(parents=True, exist_ok=True) 
 
     if FILE_PATH.exists():
-        raise Exception(f'file with OID {oid} already exists')
+        with open(FILE_PATH/f"{oid}","xb") as file:
+            file .write(oid)
+    else:      
+        raise Exception(f'file path does not exists')
 
-    with open(FILE_PATH/f"{oid}","xb") as file:
-            file .write(byte)
+
 
 
 def read(oid: str) -> bytes:
