@@ -1,26 +1,19 @@
 from utils import hashing,serialization
 from dag import dag_manager
 from HEAD import current_HEAD
-import time
-import logging
+
 from objects import commit
 #import pdb; pdb.set_trace()
 
 
 # For a first commit, no parents
-p = commit.Commit(
-    parents=[],                # root commit
-    state_hash=b"testhash",    # placeholder state
-    timestamp=int(time.time()), # current unix time
-    message="Initial commit"    # optional
-)
 
 
 def main_commit(CommitData):
 
 
     Current_Head = current_HEAD.read_head()
-    raise Exception("cur head",current_HEAD)
+
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
 
@@ -32,7 +25,17 @@ def main_commit(CommitData):
 
 
 
-def __main__(p): 
+if __name__ == "__main__":
+    import time
+    from objects import commit
+    
+    p = commit.Commit(
+        parents=[],                 # root commit
+        state_hash=b"testhash",     # placeholder state
+        timestamp=int(time.time()), # current unix time
+        message="Initial commit"    # optional
+    )
+    
     main_commit(p)
 
 
