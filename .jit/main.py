@@ -3,6 +3,7 @@ from dag import dag_manager
 from HEAD import current_HEAD
 import time
 from objects import commit
+from pathlib import Path
 
 # For a first commit, no parents
 p = commit.Commit(
@@ -15,6 +16,9 @@ p = commit.Commit(
 
 def main_commit(CommitData):
 
+
+    log_path = Path(".jit") / "debug.log"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
     #Pass commit 
 
     Current_Head = current_HEAD.read_head()
