@@ -29,10 +29,10 @@ def main_commit(CommitData):
     oid        = hashing.Hash_OID(serialised_data)
 
 
-    commit_object = {"oid":oid,"parents":Current_Head,"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
+    commit_object = {"oid":oid,"parents":[Current_Head] if Current_Head else [],"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
 
 
-    DAG_creation =  dag_manager.Dag(commit_object)
+    DAG_creation =  dag_manager.Dag(commit_object,serialised_data )
 
 
 
