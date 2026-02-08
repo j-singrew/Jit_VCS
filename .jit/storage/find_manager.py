@@ -5,7 +5,7 @@ from utils import serialization
 def location_orchestration(oid: bool):
 
     if exists(oid):
-       shard_folder, file_path =  paths_for_oid(oid)
+       _, file_path =  paths_for_oid(oid)
        raw_file = open("{file_path}","rb")
        raw_content = raw_file.read_bytes()
        serialization.deserialization(raw_content)
