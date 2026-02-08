@@ -23,7 +23,9 @@ def main_commit(CommitData):
     print("oid:",oid)
 
     commit_object = {"oid":oid,"parents":Current_Head,"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
-
+    
+    with open(".jit/debug.log", "a") as f:
+        f.write(f"{commit_object}")
     DAG_creation =  dag_manager.Dag(commit_object)
 
 
