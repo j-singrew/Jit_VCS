@@ -1,6 +1,6 @@
 from objects import commit
 
-def serialization(CommitData:commit) ->bytes:
+def serialization(CommitData:commit) -> bytes:
     lines = []
 
     lines.append("commit-v1")
