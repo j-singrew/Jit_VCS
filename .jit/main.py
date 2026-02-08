@@ -4,7 +4,8 @@ from HEAD import current_HEAD
 import time
 import logging
 from objects import commit
-from pathlib import Path
+import pdb; pdb.set_trace()
+
 
 # For a first commit, no parents
 p = commit.Commit(
@@ -17,13 +18,7 @@ p = commit.Commit(
 
 def main_commit(CommitData):
 
-    log_file = Path(".jit") / "pipeline.log"
-    log_file.parent.mkdir(parents=True, exist_ok=True)
-    logging.basicConfig(
-    filename=log_file,
-    level=logging.DEBUG,
-    format="%(asctime)s %(levelname)s %(message)s"
-)
+
     Current_Head = current_HEAD.read_head()
     logging.debug(f"Current_Head: {Current_Head}")
         
