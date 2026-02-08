@@ -1,6 +1,6 @@
 from objects import commit
 
-def serialization(CommitData):
+def serialization(CommitData:commit) ->bytes:
     lines = []
 
     lines.append("commit-v1")
@@ -17,7 +17,7 @@ def serialization(CommitData):
     return "\n".join(lines).encode("utf-8")
 
 
-def deserialization(data: bytes):
+def deserialization(data: bytes) -> commit:
     text = data.decode("utf-8")
     lines = text.splitlines()
 
