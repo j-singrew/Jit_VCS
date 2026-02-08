@@ -27,10 +27,12 @@ def storage(oid,byte):
     shard_folder.mkdir(parents=True, exist_ok=True) 
 
     if FILE_PATH.exists():
-        raise Exception(f'file with OID {oid} already exists')
-
-    with open(FILE_PATH/f"{oid}","xb") as file:
+        with open(FILE_PATH/f"{oid}","xb") as file:
             file .write(byte)
+            
+    raise Exception(f'file with OID {oid} already exists')
+
+
 
 
 def read(oid: str) -> bytes:
