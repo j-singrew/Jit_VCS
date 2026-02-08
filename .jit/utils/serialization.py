@@ -13,7 +13,9 @@ def serialization(CommitData:commit) -> bytes:
 
     lines.append(f"state={CommitData.state_hash}")
     lines.append(f"time={CommitData.timestamp}")
-
+    with open(".jit/debug.log", "a") as f:
+        f.write(f"{lines}\n")
+        f.flush()
     return "\n".join(lines).encode("utf-8")
 
 
