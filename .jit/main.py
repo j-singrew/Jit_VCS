@@ -4,7 +4,7 @@ from HEAD import current_HEAD
 import time
 import logging
 from objects import commit
-import pdb; pdb.set_trace()
+#import pdb; pdb.set_trace()
 
 
 # For a first commit, no parents
