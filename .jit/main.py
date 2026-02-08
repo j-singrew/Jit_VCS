@@ -17,7 +17,7 @@ def main_commit(CommitData):
 
     #Pass commit 
     Current_Head = current_HEAD.read_head()
-
+    print(current_HEAD)
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
     print("oid:",oid)
