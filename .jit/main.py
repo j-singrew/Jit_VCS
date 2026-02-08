@@ -16,15 +16,17 @@ p = commit.Commit(
 def main_commit(CommitData):
 
     #Pass commit 
-    with open(".jit/debug.log", "a") as f:
-        f.write("open")
+
     Current_Head = current_HEAD.read_head()
+    with open(".jit/debug.log", "a") as f:
+        f.write(f"{Current_Head}\n")
+        f.flush()
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
 
 
     commit_object = {"oid":oid,"parents":Current_Head,"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
-    
+
 
     DAG_creation =  dag_manager.Dag(commit_object)
 
