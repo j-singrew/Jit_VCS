@@ -18,13 +18,16 @@ def main_commit(CommitData):
 
 
     log_path = Path(".jit") / "debug.log"
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    #Pass commit 
+    log_path.parent.mkdir(parents=True, exist_ok=True)  # ensures .jit folder exists
 
-    Current_Head = current_HEAD.read_head()
-    with open(".jit/debug.log", "a") as f:
-        f.write(f"{Current_Head}\n")
+
+    with log_path.open("a") as f:
+        f.write(f"{CommitData}\n")
         f.flush()
+        
+    Current_Head = current_HEAD.read_head()
+  
+        
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
 
