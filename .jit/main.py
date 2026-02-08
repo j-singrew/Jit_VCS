@@ -16,11 +16,12 @@ p = commit.Commit(
 def main_commit(CommitData):
 
     #Pass commit 
+    with open(".jit/debug.log", "a") as f:
+        f.write("open")
     Current_Head = current_HEAD.read_head()
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
-    with open(".jit/debug.log", "w") as f:
-        f.write(f"{oid}")
+
 
     commit_object = {"oid":oid,"parents":Current_Head,"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
     
