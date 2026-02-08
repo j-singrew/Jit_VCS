@@ -2,6 +2,7 @@ from utils import hashing,serialization
 from dag import dag_manager
 from HEAD import current_HEAD
 import time
+import logging
 from objects import commit
 from pathlib import Path
 
@@ -16,17 +17,15 @@ p = commit.Commit(
 
 def main_commit(CommitData):
 
-
-    log_path = Path(".jit") / "debug.log"
-    log_path.parent.mkdir(parents=True, exist_ok=True)  # ensures .jit folder exists
-
-
-    with log_path.open("a") as f:
-        f.write(f"{CommitData}\n")
-        f.flush()
-        
+    log_file = Path(".jit") / "pipeline.log"
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+    filename=log_file,
+    level=logging.DEBUG,
+    format="%(asctime)s %(levelname)s %(message)s"
+)
     Current_Head = current_HEAD.read_head()
-  
+    logging.debug(f"Current_Head: {Current_Head}")
         
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
