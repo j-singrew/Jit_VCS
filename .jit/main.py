@@ -25,7 +25,7 @@ def main_commit(CommitData):
     DAG_creation =  dag_manager.Dag(commit_object)
 
 
-    storage_manager.storage(byte_oid)
+    storage_manager.storage(byte_oid,oid)
     current_HEAD.write_head(byte_oid)
 
 
