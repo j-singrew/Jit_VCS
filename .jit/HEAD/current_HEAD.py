@@ -1,6 +1,6 @@
 from pathlib2 import Path
 
-FILE = Path(".jit/HEAD/.HEAD")
+FILE = Path("/.HEAD")
 
 def read_head() -> bytes | None:
     if not FILE.exists():
