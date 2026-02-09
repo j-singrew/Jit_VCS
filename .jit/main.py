@@ -21,7 +21,7 @@ def main_commit(CommitData):
     commit_object = {"oid":oid,"parents":[Current_Head] if Current_Head else [],"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
 
 
-    DAG_creation =  dag_manager.Dag(commit_object,serialised_data )
+    DAG_creation =  dag_manager.Dag(commit_object)
 
 
 
