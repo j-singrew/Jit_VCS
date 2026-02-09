@@ -7,10 +7,11 @@ load_dotenv()
 
 FILE_PATH= Path(os.getenv("FILE_PATH"))
 
-def paths_for_oid(oid: str) -> tuple[Path, Path]:
+def paths_for_oid(oid: bytes) -> tuple[Path, Path]:
 
-    shard_folder = FILE_PATH / oid[:2]          
-    file_path    = shard_folder / oid[2:]       
+    str_oid = str(oid, 'utf-8')
+    shard_folder = FILE_PATH / str_oid[:2]          
+    file_path    = shard_folder / str_oid[2:]       
     return shard_folder, file_path
 
 def exists(oid:str) -> bool:
@@ -28,7 +29,7 @@ def storage(oid:bytes ):
 
     if FILE_PATH.exists():
         with open(FILE_PATH/f"{oid}","xb") as file:
-            file .write(oid)
+            file.write(oid)
     else:      
         raise Exception(f'file path does not exists')
 
