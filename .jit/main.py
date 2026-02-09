@@ -1,7 +1,7 @@
 from utils import hashing,serialization
 from dag import dag_manager
 from HEAD import current_HEAD
-
+from storage import storage_manager
 from objects import commit
 #import pdb; pdb.set_trace()
 
@@ -22,6 +22,10 @@ def main_commit(CommitData):
 
 
     DAG_creation =  dag_manager.Dag(commit_object)
+
+
+    storage_manager.storage(oid)
+    current_HEAD.write_head(oid)
 
 
 

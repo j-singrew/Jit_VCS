@@ -21,7 +21,7 @@ def exists(oid:str) -> bool:
 
             
 
-def storage(oid: bytes ):
+def storage(oid:bytes ):
 
     shard_folder,_ = paths_for_oid(oid)
     shard_folder.mkdir(parents=True, exist_ok=True) 

@@ -20,8 +20,6 @@ def Dag(commit_object):
     dag_commit = Node(commit_object["oid"],commit_object["parents"])
 
     DAG[dag_commit.oid] = dag_commit
-    storage_manager.storage(dag_commit.oid)
-    current_HEAD.write_head(dag_commit.oid)
     return DAG
 
 
