@@ -1,6 +1,6 @@
 from pathlib2 import Path
 
-FILE = Path(".HEAD")
+FILE = Path("./HEAD/.HEAD")
 
 
 def read_head() -> bytes | None:
