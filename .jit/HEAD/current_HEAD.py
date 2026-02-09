@@ -9,8 +9,6 @@ def read_head() -> bytes | None:
 
 
 def write_head(oid: bytes) -> None:
-    """Update HEAD to point to a new commit"""
-    
     FILE.write_text(oid.hex())
 
 
