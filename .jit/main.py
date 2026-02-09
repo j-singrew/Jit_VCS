@@ -16,7 +16,7 @@ def main_commit(CommitData):
 
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
-    byte_oid =  bytes("{oid}", "utf-8")
+    byte_oid =  bytes(f"{oid}", "utf-8")
 
 
     commit_object = {"oid":oid,"parents":[Current_Head] if Current_Head else [],"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
