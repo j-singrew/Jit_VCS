@@ -28,7 +28,9 @@ def storage(oid:bytes,oid_hash:str):
     shard_folder.mkdir(parents=True, exist_ok=True) 
 
     if file_path.exists():
-        with open(file_path,"xb") as file:
+        raise Exception(f"Commit {oid} already exists")
+
+    with open(file_path,"x") as file:
             file.write(oid_hash)
 
 
