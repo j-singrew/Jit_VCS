@@ -28,7 +28,7 @@ def storage(oid:bytes ):
     shard_folder.mkdir(parents=True, exist_ok=True) 
 
     if FILE_PATH.exists():
-        with open(FILE_PATH/f"{oid}","xb") as file:
+        with open(FILE_PATH/{oid},"xb") as file:
             file.write(oid)
     else:      
         raise Exception(f'file path does not exists')
