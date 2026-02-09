@@ -3,7 +3,7 @@ from dag import dag_manager
 from HEAD import current_HEAD
 from storage import storage_manager
 from objects import commit
-#import pdb; pdb.set_trace()
+
 
 
 # For a first commit, no parents
@@ -16,6 +16,7 @@ def main_commit(CommitData):
 
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
+    byte_oid =  bytes("{oid}", "utf-8")
 
 
     commit_object = {"oid":oid,"parents":[Current_Head] if Current_Head else [],"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
@@ -24,8 +25,8 @@ def main_commit(CommitData):
     DAG_creation =  dag_manager.Dag(commit_object)
 
 
-    storage_manager.storage(oid)
-    current_HEAD.write_head(oid)
+    storage_manager.storage(byte_oid)
+    current_HEAD.write_head(byte_oid)
 
 
 
