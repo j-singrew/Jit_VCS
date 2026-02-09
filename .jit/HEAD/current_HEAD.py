@@ -10,6 +10,7 @@ def read_head() -> bytes | None:
 
 
 def write_head(oid: bytes) -> None:
+    FILE.parent.mkdir(parents=True, exist_ok=True)
     FILE.write_text(oid.hex())
 
 
