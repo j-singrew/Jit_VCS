@@ -1,6 +1,6 @@
 from pathlib2 import Path
 
-FILE = Path(".jit/HEAD/.HEAD")
+FILE = Path(".HEAD")
 
 
 def read_head() -> bytes | None:
@@ -10,7 +10,7 @@ def read_head() -> bytes | None:
 
 
 def write_head(oid: bytes) -> None:
-    FILE.parent.mkdir(parents=True, exist_ok=True)
+    FILE.parent.touch(parents=True, exist_ok=True)
     FILE.write_text(oid.hex())
 
 
