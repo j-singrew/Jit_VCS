@@ -23,7 +23,7 @@ def exist(oid:str) -> bool:
 
             
 
-def storage(oid:bytes,oid_hash:str):
+def storage(oid:bytes,serialised_data:str):
 
     shard_folder,file_path = paths_for_oid(oid)
     shard_folder.mkdir(parents=True, exist_ok=True) 
@@ -31,8 +31,8 @@ def storage(oid:bytes,oid_hash:str):
     if file_path.exists():
         raise Exception(f"Commit {oid} already exists")
 
-    with open(file_path,"x") as file:
-            file.write(oid_hash)
+    with open(file_path,"xb") as file:
+            file.write(serialised_data)
 
 
 
