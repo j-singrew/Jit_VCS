@@ -2,9 +2,8 @@ from storage import  storage_manager
 from utils import serialization
 from pathlib import Path
 
-def location_orchestration(oid:str):
-    b_oid = bytes(oid, 'utf-8')
-    _, file_path =  storage_manager.paths_for_oid(b_oid)
+def location_orchestration(serialised_data:bytes):
+    _, file_path =  storage_manager.paths_for_oid(serialised_data)
     if file_path.exists():
        raw_file = open(file_path,"rb")
        raw_content = raw_file.read()
