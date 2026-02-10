@@ -3,7 +3,7 @@ from objects import commit
 def serialization(CommitData:commit) -> bytes:
     lines = []
 
-    lines.append("commit-v1")
+    #lines.append("commit-v1")
 
     if CommitData.parents:
         for parent in CommitData.parents:
