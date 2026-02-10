@@ -25,8 +25,10 @@ def main_commit(CommitData):
     DAG_creation =  dag_manager.Dag(commit_object)
 
 
-    storage_manager.storage(byte_oid,oid)
+    storage_manager.storage(byte_oid,serialised_data)
     current_HEAD.write_head(byte_oid)
+
+    return byte_oid,serialised_data
 
 
 
@@ -40,14 +42,15 @@ if __name__ == "__main__":
     
     p = commit.Commit(
         parents=[],                 # root commit
-        state_hash=b"testhash",     # placeholder state
+        state_hash="testhash",     # placeholder state
         timestamp=int(time.time()), # current unix time
         message="Initial commit"    # optional
     )
     
-    #main_commit(p)
-    oid = "65613034323235373334616632653835313539656633386239633133393461316332613062376238346364326531333831646137363833353439396435333833"
-    t = find_test.test_find(oid)
+    byte_oid,serialised_data = main_commit(p)
+    t = find_test.test_find(serialised_data)
+    print(t)
+
     
 
 
