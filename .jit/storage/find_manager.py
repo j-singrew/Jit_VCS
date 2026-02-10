@@ -1,11 +1,11 @@
 from storage import  storage_manager
 from utils import serialization
+from pathlib import Path
 
 def location_orchestration(oid:str):
-
-    if storage_manager.exist(oid):
-       
-       _, file_path =  storage_manager.paths_for_oid(oid)
+    b_oid = bytes(oid, 'utf-8')
+    _, file_path =  storage_manager.paths_for_oid(b_oid)
+    if file_path.exists():
        raw_file = open(file_path,"rb")
        raw_content = raw_file.read()
        commit_obj =  serialization.deserialization(raw_content)
@@ -13,4 +13,4 @@ def location_orchestration(oid:str):
 
 
     else:
-        raise Exception(f"file with OID {oid} does not exist")
+        raise Exception(f"file with OID {file_path} does not exist")
