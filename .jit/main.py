@@ -48,7 +48,7 @@ if __name__ == "__main__":
     )
     
     byte_oid,serialised_data = main_commit(p)
-    t = find_test.test_find(serialised_data)
+    t = find_test.test_find(byte_oid)
     print(t)
 
     
