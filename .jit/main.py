@@ -1,7 +1,7 @@
 from utils import hashing,serialization
 from dag import dag_manager
 from HEAD import current_HEAD
-from storage import storage_manager,find_manager
+from storage import storage_manager
 from objects import commit
 
 
