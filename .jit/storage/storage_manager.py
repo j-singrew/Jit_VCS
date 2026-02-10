@@ -14,8 +14,9 @@ def paths_for_oid(oid: bytes) -> tuple[Path, Path]:
     file_path    = shard_folder / str_oid[2:]       
     return shard_folder, file_path
 
-def exists(oid:str) -> bool:
-    _, file_path = paths_for_oid(oid)
+def exist(oid:str) -> bool:
+    b_oid = bytes(oid, 'utf-8')
+    _, file_path = paths_for_oid(b_oid)
     return file_path.exists()
         
 
