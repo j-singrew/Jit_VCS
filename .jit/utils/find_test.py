@@ -1,6 +1,5 @@
 from storage import find_manager
 
-def test_finde(commit):
+def test_find(commit):
 
-    f = find_manager(commit)
-    print(f)
+    return  find_manager(commit)
