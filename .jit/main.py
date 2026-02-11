@@ -22,7 +22,7 @@ def main_commit(CommitData):
     commit_object = {"oid":oid,"parents":[Current_Head] if Current_Head else [],"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
 
 
-    DAG_creation =  dag_manager.Dag(commit_object)
+    DAG_creation =  dag_manager.Dag(oid,serialised_data)
 
 
     storage_manager.storage(byte_oid,serialised_data)
@@ -42,8 +42,8 @@ if __name__ == "__main__":
     
     p = commit.Commit(
         parents=[],                 # root commit
-        state_hash="testhash",     # placeholder state
-        timestamp=int(time.time()), # current unix time
+        stateHash="testhash",     # placeholder state
+        timeStamp=int(time.time()), # current unix time
         message="Initial commit"    # optional
     )
     
@@ -51,7 +51,6 @@ if __name__ == "__main__":
 
     t = find_test.test_find(byte_oid,oid)
     print(t)
-
 
     
 
