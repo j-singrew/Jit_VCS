@@ -21,14 +21,14 @@ DAG_FOLDER_PATH = Path(os.getenv("DAG_Folder"))
 #   depends_on: List[bytes]
 
 
-def Dag(oid:str ,serialised_data:dict):
+def Dag(oid:str ,serialised_data:bytes):
 
 
 
-    str_oid = str(oid, 'utf-8')
 
-    shard_folder = DAG_FOLDER_PATH / str_oid[:2]          
-    file_path    = shard_folder / str_oid[2:]  
+
+    shard_folder = DAG_FOLDER_PATH / oid[:2]          
+    file_path    = shard_folder / oid[2:]  
 
     shard_folder.mkdir(parents=True, exist_ok=True)  
 

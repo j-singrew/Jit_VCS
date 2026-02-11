@@ -19,7 +19,7 @@ def main_commit(CommitData):
     byte_oid =  bytes(f"{oid}", "utf-8")
 
 
-    commit_object = {"oid":oid,"parents":[Current_Head] if Current_Head else [],"state_hash":CommitData.state_hash,"timestamp":CommitData.timestamp}
+    commit_object = {"oid":oid,"parents":[Current_Head] if Current_Head else [],"state_hash":CommitData.stateHash,"timestamp":CommitData.timeStamp}
 
 
     DAG_creation =  dag_manager.Dag(oid,serialised_data)
