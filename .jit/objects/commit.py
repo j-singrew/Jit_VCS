@@ -5,6 +5,6 @@ from typing import List, Optional
 @dataclass(frozen=True)
 class Commit:
     parents: List[bytes]        
-    state_hash: bytes             
-    timestamp: int                
+    stateHash: bytes             
+    timeStamp: int                
     message: Optional[str] = None
