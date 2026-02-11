@@ -28,7 +28,7 @@ def main_commit(CommitData):
     storage_manager.storage(byte_oid,serialised_data)
     current_HEAD.write_head(byte_oid)
 
-    return byte_oid,serialised_data
+    return byte_oid,serialised_data,oid
 
 
 
@@ -47,9 +47,11 @@ if __name__ == "__main__":
         message="Initial commit"    # optional
     )
     
-    byte_oid,serialised_data = main_commit(p)
-    t = find_test.test_find(byte_oid)
+    byte_oid,serialised_data,oid = main_commit(p)
+
+    t = find_test.test_find(byte_oid,oid)
     print(t)
+
 
     
 
