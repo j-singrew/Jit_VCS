@@ -21,7 +21,7 @@ DAG_FOLDER_PATH = Path(os.getenv("DAG_Folder"))
 #   depends_on: List[bytes]
 
 
-def Dag(oid:str ,serialised_data:dict):
+def Dag(oid:str ,serialised_data:bytes):
 
 
 
