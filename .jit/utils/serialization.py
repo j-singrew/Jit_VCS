@@ -11,8 +11,8 @@ def serialization(CommitData:commit) -> bytes:
     else:
         lines.append("parent=")
 
-    lines.append(f"state={CommitData.state_hash}")
-    lines.append(f"time={CommitData.timestamp}")
+    lines.append(f"state={CommitData.stateHash}")
+    lines.append(f"time={CommitData.timeStamp}")
 
     return "\n".join(lines).encode("utf-8")
 
@@ -37,8 +37,8 @@ def deserialization(data: bytes) -> commit:
 
     item_commit = commit.Commit(
         parents=parents,
-        state_hash=state,
-        timestamp=timestamp
+        stateHash=state,
+        timeStamp=timestamp
     )
 
     return item_commit
