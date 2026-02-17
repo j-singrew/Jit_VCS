@@ -13,7 +13,6 @@ def main_commit(CommitData):
 
 
     Current_Head = current_HEAD.read_head()
-
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
     byte_oid =  bytes(f"{oid}", "utf-8")
@@ -50,8 +49,9 @@ if __name__ == "__main__":
     
     byte_oid,serialised_data,oid = main_commit(p)
     t = find_test.test_find(byte_oid,oid)
-    m = dag_transversal.transverse(byte_oid,oid)
-    #print("this is m",m)
+    curr_Head = current_HEAD.read_head()
+    m = dag_transversal.transverse(curr_Head)
+    print("this is m",m)
 
     
 
