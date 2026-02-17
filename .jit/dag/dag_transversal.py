@@ -3,11 +3,21 @@ from  storage import find_manager
 #DFS - later implementatio
 
 
-def transverse(byte_oid,oid):
-    curr_Head = current_HEAD.read_head()
-    print(curr_Head)
-    file1 = find_manager.location_orchestration(byte_oid,oid)
-    #print(file1)
+def transverse(curr_Head):
+    str_curr = curr_Head.decode('utf-8')
+    file1 = find_manager.location_orchestration(curr_Head ,str_curr)
+    print(file1)
+    parent = file1.parents
+
+    if parent == []:
+        return f"We found root ,{curr_Head}"
+    if parent[0] ==  curr_Head:
+        raise Exception("Node cannot reference itself")
+    else:
+        curr_Head = parent[0]
+        return transverse(curr_Head)
+
+
 
 
     
