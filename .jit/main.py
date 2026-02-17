@@ -26,8 +26,8 @@ def main_commit(CommitData):
 
 
     storage_manager.storage(byte_oid,serialised_data)
-    current_HEAD.write_head(byte_oid)
-
+    current_HEAD.write_head(byte_oid)   
+    c = current_HEAD.read_head()
     return byte_oid,serialised_data,oid
 
 
@@ -49,10 +49,9 @@ if __name__ == "__main__":
     )
     
     byte_oid,serialised_data,oid = main_commit(p)
-    print(byte_oid)
     t = find_test.test_find(byte_oid,oid)
     m = dag_transversal.transverse(byte_oid,oid)
-    print(m)
+    #print("this is m",m)
 
     
 
