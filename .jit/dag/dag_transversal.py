@@ -5,10 +5,8 @@ from  storage import find_manager
 
 def transverse(byte_oid,oid):
     curr_Head = current_HEAD.read_head()
-
-
-    print("this is byte cur",byte_oid)
-    #file1 = find_manager.location_orchestration(byte_current_head,oid)
+    print(curr_Head)
+    file1 = find_manager.location_orchestration(byte_oid,oid)
     #print(file1)
 
 
