@@ -1,7 +1,15 @@
 from HEAD import current_HEAD
-#DFS - later implementation
+from  storage import find_manager
+#DFS - later implementatio
 
 
-def transverse():
-    current_head = current_HEAD.read_head
+def transverse(byte_oid,oid):
+    curr_Head = current_HEAD.read_head()
+
+
+    print("this is byte cur",byte_oid)
+    #file1 = find_manager.location_orchestration(byte_current_head,oid)
+    #print(file1)
+
+
     

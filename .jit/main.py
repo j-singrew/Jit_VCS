@@ -1,5 +1,5 @@
 from utils import hashing,serialization,find_test
-from dag import dag_manager
+from dag import dag_manager,dag_transversal
 from HEAD import current_HEAD
 from storage import storage_manager
 
@@ -39,6 +39,7 @@ def main_commit(CommitData):
 if __name__ == "__main__":
     import time
     from objects import commit
+
     
     p = commit.Commit(
         parents=[],                 # root commit
@@ -48,9 +49,10 @@ if __name__ == "__main__":
     )
     
     byte_oid,serialised_data,oid = main_commit(p)
-
+    print(byte_oid)
     t = find_test.test_find(byte_oid,oid)
-    print(t)
+    m = dag_transversal.transverse(byte_oid,oid)
+    print(m)
 
     
 
