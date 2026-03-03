@@ -11,6 +11,7 @@ def location_orchestration(byte_oid:bytes,oid:str):
 
        if  oid_verification.oid_verification(raw_content,oid):
             commit_obj =  serialization.deserialization(raw_content)
+            DataExtraction(commit_obj)
             return commit_obj
        else:
             raw_file.close()
@@ -19,3 +20,11 @@ def location_orchestration(byte_oid:bytes,oid:str):
 
     else:
         raise Exception(f"file with OID {file_path} does not exist")
+    
+def DataExtraction(commit_obj):
+    
+    content_hash  = commit_obj.stateHash[7:]
+    timestamp = commit_obj.timeStamp
+    print("hash: ",content_hash)
+    print("timestamps :",timestamp)
+    
