@@ -23,7 +23,7 @@ def location_orchestration(byte_oid:bytes,oid:str):
     
 def DataExtraction(commit_obj):
     
-    content_hash  = commit_obj.stateHash[7:]
+    content_hash  = commit_obj.stateHash
     timestamp = commit_obj.timeStamp
     print("hash: ",content_hash)
     print("timestamps :",timestamp)
