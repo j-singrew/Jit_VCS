@@ -27,7 +27,7 @@ def main_commit(CommitData):
     storage_manager.storage(byte_oid,serialised_data)
     current_HEAD.write_head(byte_oid)   
     c = current_HEAD.read_head()
-    return byte_oid,serialised_data,oid
+    return byte_oid,serialised_data,oid, Current_Head
 
 
 
@@ -47,11 +47,21 @@ if __name__ == "__main__":
         message="Initial commit"    # optional
     )
     
-    byte_oid,serialised_data,oid = main_commit(p)
+    byte_oid,serialised_data,oid, Current_Head = main_commit(p)
     t = find_test.test_find(byte_oid,oid)
     curr_Head = current_HEAD.read_head()
+    
+    new_commit = commit.Commit(
+    parents=[oid],
+    stateHash="hash2",
+    timeStamp=int(time.time()),
+    message="Second commit"
+    )
+
+    byte_oid, serialised_data, oid,Current_Head = main_commit(new_commit)
     m = dag_transversal.transverse(curr_Head)
-    print("this is m",m)
+    t = find_test.test_find(byte_oid,oid)
+    print("this is m",m,t)
 
     
 
