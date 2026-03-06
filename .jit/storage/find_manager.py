@@ -2,24 +2,39 @@ from storage import  storage_manager,oid_verification
 from utils import serialization
 from utils import hashing
 from pathlib import Path
-def DataExtraction(commit_obj):
-    path = []
-    current = commit_obj.stateHash
-    byte_str = str(current)
+
+def DataExtraction(current_byte_oid,oid):
+
+
+
+
+
     
     while True:
-        commit_obj = location_orchestration(current,byte_str)
-        path.append((current, commit_obj))
+        visited = set()
+        path = []
+        if oid in visited:
+            raise Exception("Cycle detected in DAG")
+        visited.add(oid)
+
+        commit_obj = location_orchestration(current_byte_oid,oid)
+        path.append((current_byte_oid, commit_obj))
+
         if not commit_obj.parents:   
-            print("We found root")
-            break
-        current = commit_obj.parents[0]
+                print("We found root")
+                break
+        oid= commit_obj.parents[0]
+        current_byte_oid = bytes.fromhex(oid)
+
+
 
     return path
  
 
 def location_orchestration(byte_oid:bytes,oid:str):
+
     _, file_path =  storage_manager.paths_for_oid(byte_oid)
+
     if file_path.exists():
        raw_file = open(file_path,"rb")
        raw_content = raw_file.read()

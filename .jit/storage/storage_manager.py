@@ -10,9 +10,9 @@ FILE_PATH= Path(os.getenv("FILE_PATH"))
 
 def paths_for_oid(oid: bytes) -> tuple[Path, Path]:
 
-    str_oid = str(oid, 'utf-8')
-    shard_folder = FILE_PATH / str_oid[:2]          
-    file_path    = shard_folder / str_oid[2:]       
+    oid_b = oid.hex()
+    shard_folder = FILE_PATH / oid_b[:2]          
+    file_path    = shard_folder / oid_b[2:]       
     return shard_folder, file_path
 
 def exist(oid:str) -> bool:

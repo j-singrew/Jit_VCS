@@ -1,7 +1,7 @@
 from utils import hashing,serialization,find_test
 from dag import dag_manager,dag_transversal
 from HEAD import current_HEAD
-from storage import storage_manager
+from storage import storage_manager, find_manager
 
 from objects import commit
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     byte_oid, serialised_data, oid,Current_Head = main_commit(new_commit)
     m = dag_transversal.transverse(curr_Head)
     t = find_test.test_find(byte_oid,oid)
-    print("this is m",m,t)
+    d = find_manager.DataExtraction(byte_oid,oid)
 
     
 
