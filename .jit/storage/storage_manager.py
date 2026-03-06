@@ -10,6 +10,9 @@ FILE_PATH= Path(os.getenv("FILE_PATH"))
 
 def paths_for_oid(oid: bytes) -> tuple[Path, Path]:
 
+    if not isinstance(oid, bytes):
+         oid = bytes.fromhex(oid)
+
     oid_b = oid.hex()
     shard_folder = FILE_PATH / oid_b[:2]          
     file_path    = shard_folder / oid_b[2:]       
