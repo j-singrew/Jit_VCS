@@ -15,7 +15,8 @@ def DataExtraction(current_byte_oid: bytes, oid: str):
         if isinstance(oid, bytes):
             oid = oid.decode() 
 
-        current_byte_oid = bytes.fromhex(oid)
+        current_byte_oid = oid.encode('utf-8').hex()
+        print("cur cur",current_byte_oid)
         commit_obj = location_orchestration(current_byte_oid, oid)
         path.append((current_byte_oid, commit_obj))
 
