@@ -10,8 +10,10 @@ FILE_PATH= Path(os.getenv("FILE_PATH"))
 
 def paths_for_oid(oid: bytes) -> tuple[Path, Path]:
 
-    if not isinstance(oid, bytes):
-         oid = bytes.fromhex(oid)
+    if isinstance(oid, str):
+        oid = bytes.fromhex(oid)
+    elif not isinstance(oid, bytes):
+        raise TypeError("OID must be bytes or hex string")
 
     oid_b = oid.hex()
     shard_folder = FILE_PATH / oid_b[:2]          
@@ -19,7 +21,11 @@ def paths_for_oid(oid: bytes) -> tuple[Path, Path]:
     return shard_folder, file_path
 
 def exist(oid:str) -> bool:
-    b_oid = bytes(oid, 'utf-8')
+    if isinstance(oid, str):
+        b_oid = bytes.fromhex(oid)
+    else:
+        b_oid = oid
+
     _, file_path = paths_for_oid(b_oid)
     return file_path.exists()
         
