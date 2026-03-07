@@ -13,9 +13,6 @@ def main_commit(CommitData):
 
     if CommitData.parents == []:
         Current_Head = None
-
-    else:
-        Current_Head = current_HEAD.read_head()
         
     print("Cur_head", Current_Head)
     serialised_data = serialization.serialization(CommitData)
@@ -65,13 +62,16 @@ if __name__ == "__main__":
     timeStamp=int(time.time()),
     message="Second commit"
     )
-
+    print("cur_head hex",  Current_Head)
+    print("new_commit",new_commit)
     byte_oid, serialised_data, oid= main_commit(new_commit)
-    print("byte oid",type(byte_oid))
-    print("second coming ", type(Current_Head))
+
+    print("byte oid",byte_oid)
+
     m = dag_transversal.transverse(Current_Head)
     t = find_test.test_find(byte_oid,oid)
     print("Test find ",m)
+    
     d = find_manager.DataExtraction(byte_oid,oid)
 
     
