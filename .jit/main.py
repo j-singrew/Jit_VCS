@@ -5,16 +5,17 @@ from storage import storage_manager, find_manager
 
 from objects import commit
 
+Current_Head = current_HEAD.read_head()
 
 # For a first commit, no parents
 
 
-def main_commit(CommitData):
+def main_commit(CommitData,Current_Head):
 
     if CommitData.parents == []:
         Current_Head = None
         
-    print("Cur_head", Current_Head)
+
     serialised_data = serialization.serialization(CommitData)
     oid        = hashing.Hash_OID(serialised_data)
     byte_oid =  bytes(oid, "utf-8")
@@ -49,7 +50,7 @@ if __name__ == "__main__":
         message="Initial commit"    # optional
     )
     
-    byte_oid,serialised_data,oid= main_commit(p)
+    byte_oid,serialised_data,oid= main_commit(p,Current_Head)
 
     t = find_test.test_find(byte_oid,oid)
     Current_Head = current_HEAD.read_head()
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     )
     print("cur_head hex",  Current_Head)
     print("new_commit",new_commit)
-    byte_oid, serialised_data, oid= main_commit(new_commit)
+    byte_oid, serialised_data, oid= main_commit(new_commit,Current_Head)
 
     print("byte oid",byte_oid)
 
