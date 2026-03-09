@@ -50,10 +50,10 @@ if __name__ == "__main__":
         message="Initial commit"    # optional
     )
     
-    byte_oid,serialised_data,oid= main_commit(p,Current_Head)
+    #byte_oid,serialised_data,oid= main_commit(p,Current_Head)
 
-    t = find_test.test_find(byte_oid,oid)
-    Current_Head = current_HEAD.read_head()
+    #t = find_test.test_find(byte_oid,oid)
+    #Current_Head = current_HEAD.read_head()
 
 
     
@@ -68,9 +68,9 @@ if __name__ == "__main__":
     byte_oid, serialised_data, oid= main_commit(new_commit,Current_Head)
 
     print("byte oid",byte_oid)
-
+    print("here cur type",type(Current_Head))
     m = dag_transversal.transverse(Current_Head)
-    t = find_test.test_find(byte_oid,oid)
+
     print("Test find ",m)
     
     d = find_manager.DataExtraction(byte_oid,oid)
