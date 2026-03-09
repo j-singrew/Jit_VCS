@@ -15,7 +15,8 @@ def transverse(curr_Head:bytes):
         raise Exception("Node cannot reference itself")
     else:
         curr_Head = parent[0]
-        return transverse(curr_Head)
+        byt = curr_Head.encode('utf-8')
+        return transverse(byt)
 
 
 

@@ -45,7 +45,7 @@ def location_orchestration(current_byte_oid:bytes,oid:str):
             return commit_obj
        else:
             raw_file.close()
-            raise Exception(f"file with OID {oid} failed verification")
+            raise Exception("file with OID ",oid," failed verification")
 
 
     else:
