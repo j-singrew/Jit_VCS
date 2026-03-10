@@ -28,27 +28,26 @@ def DataExtraction(oid: bytes):
         oid = commit_obj.parents[0]   # already bytes
 
     return path
- 
 
-def location_orchestration(current_byte_oid:bytes):
+def location_orchestration(current_byte_oid: bytes):
 
+    print("location oid", current_byte_oid)
 
     shard_folder, file_path = storage_manager.paths_for_oid(current_byte_oid)
 
-    if file_path.exists():
-       raw_file = open(file_path,"rb")
-       raw_content = raw_file.read()
-       oid = current_byte_oid.decode('utf-8')
-       if  oid_verification.oid_verification(raw_content,oid):
-            commit_obj =  serialization.deserialization(raw_content)
-            return commit_obj
-       else:
-            raw_file.close()
-            raise Exception("file with OID ",oid," failed verification")
+    print("file path", file_path)
+    print("shard folder", shard_folder)
 
+    if not file_path.exists():
+        raise Exception("file with OID", file_path, "does not exist")
 
+    with open(file_path, "rb") as raw_file:
+        raw_content = raw_file.read()
+
+    oid_hex = current_byte_oid.hex()
+
+    if oid_verification.oid_verification(raw_content, oid_hex):
+        commit_obj = serialization.deserialization(raw_content)
+        return commit_obj
     else:
-        raise Exception("file with OID", file_path ," does not exist")
-    
-
-    
+        raise Exception("file with OID", oid_hex, "failed verification")

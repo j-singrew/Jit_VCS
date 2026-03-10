@@ -1,55 +1,59 @@
 import os
 from dotenv import load_dotenv
-
 from pathlib import Path
 
+load_dotenv()
 
-load_dotenv() 
+FILE_PATH = Path(os.getenv("FILE_PATH"))
 
-FILE_PATH= Path(os.getenv("FILE_PATH"))
 
-def paths_for_oid(oid: bytes) -> tuple[Path, Path]:
+def normalize_oid(oid):
 
     if isinstance(oid, str):
-        oid = bytes.fromhex(oid)
-    elif not isinstance(oid, bytes):
-        raise TypeError("OID must be bytes or hex string")
+        return bytes.fromhex(oid)
 
-    oid_b = oid.hex()
-    shard_folder = FILE_PATH / oid_b[:2]          
-    file_path    = shard_folder / oid_b[2:]       
+    if isinstance(oid, bytes) and len(oid) == 64:
+        return bytes.fromhex(oid.decode())
+
+    return oid
+
+
+def paths_for_oid(oid) -> tuple[Path, Path]:
+
+    oid = normalize_oid(oid)
+
+    oid_hex = oid.hex()
+
+    shard_folder = FILE_PATH / oid_hex[:2]
+    file_path = shard_folder / oid_hex[2:]
+
     return shard_folder, file_path
 
-def exist(oid:str) -> bool:
-    if isinstance(oid, str):
-        b_oid = bytes.fromhex(oid)
-    else:
-        b_oid = oid
 
-    _, file_path = paths_for_oid(b_oid)
+def exist(oid) -> bool:
+
+    _, file_path = paths_for_oid(oid)
+
     return file_path.exists()
-        
 
 
-            
+def storage(oid: bytes, serialised_data: bytes):
 
-def storage(oid:bytes,serialised_data:str):
+    shard_folder, file_path = paths_for_oid(oid)
 
-    shard_folder,file_path = paths_for_oid(oid)
-    shard_folder.mkdir(parents=True, exist_ok=True) 
+    shard_folder.mkdir(parents=True, exist_ok=True)
 
     if file_path.exists():
-        raise Exception(f"Commit {oid} already exists")
+        raise Exception(f"Commit {oid.hex()} already exists")
 
-    with open(file_path,"xb") as file:
-            file.write(serialised_data)
-
-
+    with open(file_path, "xb") as file:
+        file.write(serialised_data)
 
 
+def read(oid) -> bytes:
 
-def read(oid: str) -> bytes:
     _, file_path = paths_for_oid(oid)
+
     if not file_path.exists():
         raise Exception(f"file with OID {oid} does not exist")
 
