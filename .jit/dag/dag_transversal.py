@@ -5,7 +5,7 @@ from  storage import find_manager
 
 def transverse(curr_Head:bytes):
     
-    file1 = find_manager.location_orchestration(curr_Head ,curr_Head.decode('utf-8'))
+    file1 = find_manager.location_orchestration(curr_Head )
     print(file1)
     parent = file1.parents
 

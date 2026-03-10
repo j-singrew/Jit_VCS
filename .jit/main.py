@@ -50,12 +50,12 @@ if __name__ == "__main__":
         message="Initial commit"    # optional
     )
     
-    #byte_oid,serialised_data,oid= main_commit(p,Current_Head)
+    byte_oid,serialised_data,oid= main_commit(p,Current_Head)
 
-    #t = find_test.test_find(byte_oid,oid)
-    #Current_Head = current_HEAD.read_head()
+    t = find_test.test_find(byte_oid,oid)
+    Current_Head = current_HEAD.read_head()
 
-
+    print("here cur type",type(Current_Head))
     
     new_commit = commit.Commit(
     parents=[Current_Head],
@@ -63,17 +63,12 @@ if __name__ == "__main__":
     timeStamp=int(time.time()),
     message="Second commit"
     )
-    print("cur_head hex",  Current_Head)
-    print("new_commit",new_commit)
+
     byte_oid, serialised_data, oid= main_commit(new_commit,Current_Head)
 
-    print("byte oid",byte_oid)
-    print("here cur type",type(Current_Head))
-    m = dag_transversal.transverse(Current_Head)
 
-    print("Test find ",m)
-    
-    d = find_manager.DataExtraction(byte_oid,oid)
+    m = dag_transversal.transverse(Current_Head)    
+    d = find_manager.DataExtraction(oid)
 
     
 
