@@ -3,35 +3,34 @@ from utils import serialization
 from utils import hashing
 from pathlib import Path
 
-def DataExtraction(current_byte_oid: bytes, oid: str):
+def DataExtraction(oid: bytes):
     visited = set()
     path = []
 
     while True:
         if oid in visited:
             raise Exception("Cycle detected in DAG")
+
         visited.add(oid)
 
-        if isinstance(oid, bytes):
-            oid = oid.decode() 
+        hex_oid = oid
 
-        current_byte_oid = oid.encode('utf-8').hex()
-        print("cur cur",current_byte_oid)
-        commit_obj = location_orchestration(current_byte_oid, oid)
-        path.append((current_byte_oid, commit_obj))
+        print("current oid:", hex_oid)
 
-        if not commit_obj.parents:   
+        commit_obj = location_orchestration(oid)
+
+        path.append((oid, commit_obj))
+
+        if not commit_obj.parents:
             print("We found root")
             break
 
-
-        oid = commit_obj.parents[0].strip()       
-    
+        oid = commit_obj.parents[0]   # already bytes
 
     return path
  
 
-def location_orchestration(current_byte_oid:bytes,oid:str):
+def location_orchestration(current_byte_oid:bytes):
 
 
     shard_folder, file_path = storage_manager.paths_for_oid(current_byte_oid)
@@ -39,7 +38,7 @@ def location_orchestration(current_byte_oid:bytes,oid:str):
     if file_path.exists():
        raw_file = open(file_path,"rb")
        raw_content = raw_file.read()
-
+       oid = current_byte_oid.decode('utf-8')
        if  oid_verification.oid_verification(raw_content,oid):
             commit_obj =  serialization.deserialization(raw_content)
             return commit_obj
@@ -49,7 +48,7 @@ def location_orchestration(current_byte_oid:bytes,oid:str):
 
 
     else:
-        raise Exception(f"file with OID {file_path} does not exist")
+        raise Exception("file with OID", file_path ," does not exist")
     
 
     
